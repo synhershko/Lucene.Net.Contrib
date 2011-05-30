@@ -1,0 +1,7 @@
+_toport
+_ReSharper*
+obj
+bin
+*.suo
+*.user
+~$*
