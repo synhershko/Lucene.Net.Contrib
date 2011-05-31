@@ -25,7 +25,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Lucene.Net.Contrib.Tests.Analysis
 {
 	[TestClass]
-	public class HTMLStripCharFilterTest
+	public class HTMLStripCharFilterTest : TestBase
 	{
 		[TestMethod]
 		public void Test()
@@ -147,11 +147,6 @@ namespace Lucene.Net.Contrib.Tests.Analysis
 			assertTrue("Escaped tag not preserved: " + result.IndexOf("reserved", 15), result.IndexOf("reserved", 15) == 38);
 			assertTrue("Escaped tag not preserved: " + result.IndexOf("reserved", 41), result.IndexOf("reserved", 41) == 54);
 			assertTrue("Other tag should be removed", result.IndexOf("other") == -1);
-		}
-
-		private static void assertTrue(string p0, bool p1)
-		{
-			Assert.IsTrue(p1, p0);
 		}
 
 		[TestMethod]
@@ -276,11 +271,6 @@ namespace Lucene.Net.Contrib.Tests.Analysis
 			}
 		}
 
-		private static void assertEquals(int strOff, int correctedOff)
-		{
-			Assert.AreEqual(strOff, correctedOff);
-		}
-
 		[TestMethod]
 		public void TestOffsets()
 		{
@@ -290,14 +280,6 @@ namespace Lucene.Net.Contrib.Tests.Analysis
 
 			// test backtracking
 			doTestOffsets("X < &zz >X &# < X > < &l > &g < X");
-		}
-
-		private static FileStream GetTestFile(string fileName)
-		{
-			var fullPath = System.Reflection.Assembly.GetAssembly(typeof(HTMLStripCharFilterTest)).Location;
-			var testsDirectory = Path.GetDirectoryName(fullPath) ?? string.Empty;
-			//return new FileStream(Path.Combine(testsDirectory, @"..\TestFiles\", fileName), FileMode.Open);
-			return new FileStream(Path.Combine(testsDirectory, @"z:\Projects\Lucene.Net.Contrib\Lucene.Net.Contrib\TestFiles\", fileName), FileMode.Open);
 		}
 	}
 }

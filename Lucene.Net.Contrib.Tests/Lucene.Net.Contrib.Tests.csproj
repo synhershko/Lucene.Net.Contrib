@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Analysis\HTMLStripCharFilterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Dev\Libraries\Lucene.Net\trunk\C#\src\Lucene.Net\Lucene.Net.csproj">
