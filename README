@@ -1,0 +1,7 @@
+Lucene.Net.Contrib
+
+This is a repository project for all things Lucene.Net that were not ported yet from Java Lucene/Java, or are not maintained in the official Contrib.Net.
+
+Custom Lucene.Net code written by users is also welcome.
+
+All code is released under the Apache 2.0 license.
