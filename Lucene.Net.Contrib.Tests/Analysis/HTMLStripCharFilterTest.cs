@@ -281,5 +281,30 @@ namespace Lucene.Net.Contrib.Tests.Analysis
 			// test backtracking
 			doTestOffsets("X < &zz >X &# < X > < &l > &g < X");
 		}
+
+		[TestMethod]
+		public void TestHebrewScenarios()
+		{
+			const string html = "<div class=\"foo\">בדיקה ראשונה</div> וכאן נוסיף גם <a href=\"#bar\">לינק</a> ועכשיו " +
+					"גם <a alt=\"לינק מסובך עם תיאור\" href=\"http://lucene.apache.org/\">לינק מסובך יותר</a>. " +
+					" <!-- הערה אחת ויחידה -->";
+			const string gold = " בדיקה ראשונה  וכאן נוסיף גם  לינק  ועכשיו " +
+			                    "גם  לינק מסובך יותר .   ";
+			var reader = new HTMLStripCharFilter(CharReader.Get(new StringReader(html)));
+			var builder = new StringBuilder();
+			var ch = -1;
+			var goldArray = gold.ToCharArray();
+			var position = 0;
+			while ((ch = reader.Read()) != -1)
+			{
+				var theChar = (char)ch;
+				builder.Append(theChar);
+				Assert.IsTrue(theChar == goldArray[position], "\"" + theChar + "\"" + " at position: " + position + " does not equal: \"" + goldArray[position] + "\". Buffer so far: " + builder + "<EOB>");
+				position++;
+			}
+			Assert.AreEqual(gold, builder.ToString());
+
+			doTestOffsets("שלום X מה X שלומך חבר");
+		}
 	}
 }
