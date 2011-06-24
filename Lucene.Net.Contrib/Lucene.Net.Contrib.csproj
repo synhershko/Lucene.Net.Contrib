@@ -45,9 +45,9 @@
     <Compile Include="Search\BinaryCoordSimilarity.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Dev\Libraries\Lucene.Net\trunk\C#\src\Lucene.Net\Lucene.Net.csproj">
+    <ProjectReference Include="..\..\..\Dev\Libraries\Lucene.Net\trunk\C#\src\Lucene.Net\Lucene.Net.4.csproj">
       <Project>{5D4AD9BE-1FFB-41AB-9943-25737971BF57}</Project>
-      <Name>Lucene.Net</Name>
+      <Name>Lucene.Net.4</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

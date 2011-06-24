@@ -50,15 +50,6 @@ namespace Lucene.Net.Analysis
 		private readonly StringBuilder sb = new StringBuilder();
 		public readonly static int DEFAULT_READ_AHEAD = 8192;
 
-
-		// TODO
-		/*public static void main(String[] args) {
-		  Reader in = new HTMLStripCharFilter(
-				  CharReader.get(new InputStreamReader(System.in)));
-		  int ch;
-		  while ( (ch=in.Read()) != -1 ) System.out.print((char)ch);
-		}*/
-
 		public HTMLStripCharFilter(CharStream source)
 			: base(CharReader.Get(source))
 		{
