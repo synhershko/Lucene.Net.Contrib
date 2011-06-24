@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Lucene.Net.Analysis;
+using Lucene.Net.Analysis.Tokenattributes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Lucene.Net.Contrib.Tests.Analysis
@@ -280,6 +281,34 @@ namespace Lucene.Net.Contrib.Tests.Analysis
 
 			// test backtracking
 			doTestOffsets("X < &zz >X &# < X > < &l > &g < X");
+		}
+
+		[TestMethod]
+		public void TestOffsetsWithTokenizer()
+		{
+			const string input = @"test1 <a href=""foo"">testlink</a> test2 test3";
+
+			Tokenizer t = new WhitespaceTokenizer(new HTMLStripCharFilter(CharReader.Get(new StringReader(input))));
+
+			string token = string.Empty;
+			List<Token> results = new List<Token>();
+			OffsetAttribute att = ((OffsetAttribute)t.GetAttribute(typeof(OffsetAttribute)));
+
+			t.IncrementToken();
+			Assert.AreEqual(0, att.StartOffset());
+			Assert.AreEqual(5, att.EndOffset() - att.StartOffset());
+
+			t.IncrementToken();
+			Assert.AreEqual(20, att.StartOffset());
+			Assert.AreEqual(8, att.EndOffset() - att.StartOffset());
+
+			t.IncrementToken();
+			Assert.AreEqual(33, att.StartOffset());
+			Assert.AreEqual(5, att.EndOffset() - att.StartOffset());
+
+			t.IncrementToken();
+			Assert.AreEqual(39, att.StartOffset());
+			Assert.AreEqual(5, att.EndOffset() - att.StartOffset());
 		}
 
 		[TestMethod]
